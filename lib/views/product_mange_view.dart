@@ -31,35 +31,34 @@ class _ProductMangeViewState extends State<ProductMangeView> {
             const SizedBox(
               height: 20,
             ),
-            // selectProduct.isEmpty
-            //     ? Center(
-            //         child: Text('لا توجد منتجات محددة حاليًا.'),
-            //       )
-            // :
-            Consumer<ProductProvider>(
-              builder: (context, productProvider, child) {
-                return DataTable(
-                  columns: const [
-                    DataColumn(label: Text('المنتج')),
-                    DataColumn(label: Text(' الكميه المتاحه')),
-                    DataColumn(label: Text('السعر')),
-                    DataColumn(label: Text('الإجمالي')),
-                  ],
-                  rows:
-                      productProvider.products.map((ProductItemModel product) {
-                    double total = product.quantity * product.price;
-                    return DataRow(
-                      cells: [
-                        DataCell(Text(product.name)),
-                        DataCell(Text(product.quantity.toString())),
-                        DataCell(Text(product.price.toString())),
-                        DataCell(Text(total.toString())),
-                      ],
-                    );
-                  }).toList(),
-                );
-              },
-            ),
+            selectProduct.isEmpty
+                ? Center(
+                    child: Text('لا توجد منتجات محددة حاليًا.'),
+                  )
+                : Consumer<ProductProvider>(
+                    builder: (context, productProvider, child) {
+                      return DataTable(
+                        columns: const [
+                          DataColumn(label: Text('المنتج')),
+                          DataColumn(label: Text(' الكميه المتاحه')),
+                          DataColumn(label: Text('السعر')),
+                          DataColumn(label: Text('الإجمالي')),
+                        ],
+                        rows: productProvider.products
+                            .map((ProductItemModel product) {
+                          double total = product.quantity * product.price;
+                          return DataRow(
+                            cells: [
+                              DataCell(Text(product.name)),
+                              DataCell(Text(product.quantity.toString())),
+                              DataCell(Text(product.price.toString())),
+                              DataCell(Text(total.toString())),
+                            ],
+                          );
+                        }).toList(),
+                      );
+                    },
+                  ),
             const SizedBox(
               height: 20,
             ),
